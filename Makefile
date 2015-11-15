@@ -1,5 +1,8 @@
+REPO := "git@github.com:jmitchell/jmitchell.github.io.git"
+
 PREPROC_DIR = ./preproc
 PUB_DIR = ./pub
+PROD_DIR = ./prod
 
 DOC_DIR = $(PREPROC_DIR)/md
 DOC_FILES = $(shell find $(DOC_DIR) -type f -name '*.md')
@@ -20,8 +23,12 @@ watch: all watcher.sh
 refresh_preview: all
 	@echo "TODO: Refresh browser"
 
-diff:
-	@echo "TODO: diff pending deployment against production"
+diff: $(PUB_DIR)
+	# TODO: allow offline mode if no connectivity
+	@rm -rf "$(PROD_DIR)"
+	@git clone "$(REPO)" "$(PROD_DIR)"
+	@cd "$(PROD_DIR)" && git checkout master
+	@diff -y -r "$(PUB_DIR)" "$(PROD_DIR)"
 
 ship:
 	@echo "TODO: Ship"

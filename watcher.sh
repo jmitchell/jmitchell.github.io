@@ -25,8 +25,6 @@ function view {
 function cleanup {
     kill -15 $jobs
     pkill -f SimpleHTTPServer
-
-    pgrep fswatch; pgrep python
 }
 
 trap cleanup EXIT HUP TERM INT
