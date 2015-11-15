@@ -23,8 +23,8 @@ function view {
 }
 
 function cleanup {
-    kill -15 $jobs
-    pkill -f SimpleHTTPServer
+    kill -15 $jobs >/dev/null 2>&1
+    pkill -f SimpleHTTPServer >/dev/null 2>&1
 }
 
 trap cleanup EXIT HUP TERM INT
