@@ -19,7 +19,7 @@ function serve {
 }
 
 function view {
-    sleep 1 && open $URL
+    sleep 1 && open -a "Google Chrome" $URL
 }
 
 function cleanup {

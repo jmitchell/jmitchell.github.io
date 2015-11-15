@@ -6,7 +6,10 @@ Github ........ https://github.com/typeplate/starter-kit
 AUTHORS ....... Dennis Gaebel (@gryghostvisuals) & Zachary Kain (@zakkain)
 LICENSE ....... Creative Commmons Attribution 3.0 (http://creativecommons.org/licenses/by/3.0)
 LICENSE URL ... https://github.com/typeplate/starter-kit/blob/master/license.txt
+
+May include adaptations.
 */
+
 
 
 /**
@@ -134,6 +137,9 @@ body {
   hyphens: auto;
   word-wrap: break-word;
   color: #444444;
+
+  width: 75%;
+  margin: auto;
 }
 
 
@@ -545,3 +551,24 @@ abbr[title]:hover {
  * Extend this object into your markup.
  *
  */
+
+
+/****************************/
+
+#container {
+  min-width: 400px;
+  width:expression(document.body.clientWidth < 400 ? "400px" : "75%");
+}
+
+::selection {
+    background-color: #FFFF00;
+    color: #000000;
+}
+
+@media all {
+    .page-break { display:none; }
+}
+
+@media print {
+    .page-break { display:block; page-break-before:always; }
+}

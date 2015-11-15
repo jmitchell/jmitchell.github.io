@@ -1,6 +1,7 @@
 DOMAIN := "www.requisitebits.com"
 REPO := "git@github.com:jmitchell/jmitchell.github.io.git"
 
+NPM_BIN = $(shell npm bin)
 PROJ_ROOT = $(shell pwd)
 
 PREPROC_DIR = ./preproc
@@ -24,7 +25,7 @@ watch: all watcher.sh $(PREPROC_DIR) $(PUB_DIR)
 	@./watcher.sh $(PREPROC_DIR) $(PUB_DIR)
 
 refresh_preview: all
-	@echo "TODO: Refresh browser"
+	@osascript refresh_chrome.scpt
 
 diff: $(PUB_DIR) $(PROD_DIR)
 	@diff -y -r "$(PROD_DIR)" "$(PUB_DIR)" | colordiff | less -R
@@ -47,11 +48,12 @@ $(PUB_DIR): $(CSS_FILE) $(HTML_FILES)
 $(CSS_FILE): $(PREPROC_DIR)/css/main.css
 	@mkdir -p $(shell dirname $(CSS_FILE))
 	@cp $(PREPROC_DIR)/css/main.css $(CSS_FILE)
+	@$(NPM_BIN)/postcss -u autoprefixer -u lost -c postcss-conf.json -r $(CSS_FILE)
 
 $(PUB_DIR)/%.html: $(DOC_DIR)/%.md $(CSS_FILE)
 	@mkdir -p "$(@D)"
 	@echo converting "$<" to "$@"
-	@pandoc -s --template "_layout" -c "./css/main.css" -f markdown -t html5 -o "$@" "$<"
+	@pandoc -s --template "_layout" -c "/css/main.css" -f markdown -t html5 -o "$@" "$<"
 
 $(PROD_DIR):
 	# TODO: allow offline mode if no connectivity
