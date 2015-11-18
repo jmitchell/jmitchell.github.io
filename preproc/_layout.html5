@@ -9,6 +9,10 @@
     $endfor$
 
     <title>$if(title-prefix)$$title-prefix$ - $endif$$pagetitle$</title>
+    <link rel="icon" type="image/png" href="/img/logo-32x32.png"/>
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    
     <style type="text/css">code{white-space: pre;}</style>
 
     $if(quotes)$
@@ -38,34 +42,47 @@
     $endfor$
   </head>
   <body>
+    <div class="banner">
+      <div class="banner-logo">
+        <a href="/">
+          <img src="/img/logo-64x64.png" alt="Requisite Bits"/>
+        </a>
+      </div>
+      <div class="banner-title">
+        <h1>
+          Requisite Bits
+        </h1>
+      </div>
+    </div>
+    
     $for(include-before)$
     $include-before$
     $endfor$
 
-    $if(title)$
-    <header>
-      <h1 class="title typl8-alpha">$title$</h1>
-      $if(subtitle)$
-      <h1 class="subtitle typl8-beta">$subtitle$</h1>
+    <section class="main-content">
+      $if(title)$
+      <header>
+        <h1 class="title">$title$</h1>
+        $if(subtitle)$
+        <h1 class="subtitle">$subtitle$</h1>
+        $endif$
+        $for(author)$
+        <h2 class="author">$author$</h2>
+        $endfor$
+        $if(date)$
+        <h3 class="date">$date$</h3>
+        $endif$
+      </header>
       $endif$
-      $for(author)$
-      <h2 class="author typl8-delta">$author$</h2>
-      $endfor$
-      $if(date)$
-      <h3 class="date typl8-epsilon">$date$</h3>
+      
+      $if(toc)$
+      <nav id="$idprefix$TOC">
+        $toc$
+      </nav>
       $endif$
-    </header>
-    $endif$
 
-    $if(toc)$
-    <nav id="$idprefix$TOC">
-      $toc$
-    </nav>
-    $endif$
-
-    <div id="container" class="typl8-breakword">
       $body$
-    </div>
+    </section>
 
     $for(include-after)$
     $include-after$
