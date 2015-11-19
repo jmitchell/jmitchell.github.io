@@ -53,7 +53,7 @@ $(PUB_DIR)/%.html: $(DOC_DIR)/%.md
 $(PUB_DIR)/css/%: $(PREPROC_DIR)/css/%
 	@mkdir -p "$(@D)"
 	@cp "$<" "$@"
-	@$(NPM_BIN)/postcss -u autoprefixer -u lost -c $(PREPROC_DIR)/postcss-conf.json -r "$@"
+	@$(NPM_BIN)/postcss -u autoprefixer -u postcss-simple-vars -u lost -c $(PREPROC_DIR)/postcss-conf.json -r "$@"
 
 $(PUB_DIR)/img/%: $(PREPROC_DIR)/img/%
 	@mkdir -p "$(@D)"

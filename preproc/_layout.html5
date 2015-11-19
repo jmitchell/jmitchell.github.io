@@ -42,50 +42,67 @@
     $endfor$
   </head>
   <body>
-    <div class="banner">
-      <div class="banner-logo">
-        <a href="/">
-          <img src="/img/logo-64x64.png" alt="Requisite Bits"/>
-        </a>
+    <header class="top-header">
+      <div class="banner">
+        <div class="banner-logo">
+          <a href="/">
+            <img class="logo-img" src="/img/logo-64x64.png" alt="Requisite Bits"/>
+          </a>
+        </div>
+        <h1 class="banner-title">Requisite Bits</h1>
       </div>
-      <div class="banner-title">
-        <h1>
-          Requisite Bits
-        </h1>
-      </div>
-    </div>
-    
-    $for(include-before)$
-    $include-before$
-    $endfor$
 
-    <section class="main-content">
-      $if(title)$
-      <header>
-        <h1 class="title">$title$</h1>
+      <hr/>
+
+      $for(include-before)$
+      $include-before$
+      $endfor$
+
+      <hr/>
+    </header>
+
+    <div id="main">
+      <article>
+        $if(title)$
+        <h2 class="title">$title$</h2>
         $if(subtitle)$
-        <h1 class="subtitle">$subtitle$</h1>
+        <h3 class="subtitle">$subtitle$</h3>
         $endif$
         $for(author)$
-        <h2 class="author">$author$</h2>
+        <h4 class="author">$author$</h4>
         $endfor$
+
+        $if(author)$
         $if(date)$
-        <h3 class="date">$date$</h3>
+        <span class="author-date-sep">&nbsp;&mdash;&nbsp;</span>
         $endif$
-      </header>
-      $endif$
+        $endif$
+
+        $if(date)$
+        <h4 class="date">$date$</h4>
+        $endif$
+        $endif$
       
-      $if(toc)$
-      <nav id="$idprefix$TOC">
-        $toc$
-      </nav>
-      $endif$
+        $if(toc)$
+        <nav id="$idprefix$TOC">
+          $toc$
+        </nav>
+        $endif$
 
-      $body$
-    </section>
+        <div class="article-content">
+          $body$
+        </div>
+      </article>
 
-    $for(include-after)$
-    $include-after$
-    $endfor$
+      <nav></nav>
+
+      <aside></aside>
+    </div>
+
+    <footer>
+      $for(include-after)$
+      $include-after$
+      $endfor$
+    </footer>
   </body>
 </html>
